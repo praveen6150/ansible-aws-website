@@ -1,3 +1,5 @@
 [webservers]
 ec2-3-28-183-78.me-central-1.compute.amazonaws.com
+ec2-3-28-55-135.me-central-1.compute.amazonaws.com
+ec2-158-252-104-77.me-central-1.compute.amazonaws.com
 
