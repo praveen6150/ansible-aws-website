@@ -1,0 +1,36 @@
+---
+- name: Website deployment.
+  hosts: webservers
+  tasks:
+    - name: Install webserver softwares.
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - nginx
+        - firewalld
+        - net-tools
+
+    - name: Ensure service is up.
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - firewalld
+        - nginx
+
+    - name: Permanently enable https service, also enable it immediately if possible
+      ansible.posix.firewalld:
+        service: http
+        state: enabled
+        permanent: true
+        immediate: true
+
+    - name: Copy using inline content
+      ansible.builtin.copy:
+        content: >
+          Hello World! from {{ ansible_facts['fqdn'] }}.
+        dest: /usr/share/nginx/html/index.html
+...
+

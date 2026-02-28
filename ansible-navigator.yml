@@ -1,0 +1,12 @@
+---
+ansible-navigator:
+  execution-environment:
+    image: registry.redhat.io/ansible-automation-platform-24/ee-minimal-rhel8:latest
+    volume-mounts:
+      - src: /home/ec2-user/ansible-aws-cockpit/
+        dest: /home/runner/ansible-aws-cockpit/
+    pull:
+      policy: missing
+  playbook-artifact:
+    enable: false
+...
